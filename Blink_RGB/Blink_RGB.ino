@@ -3,7 +3,7 @@
 */
 #include <Adafruit_NeoPixel.h>
 #define PIN 9 // 腳位(可更改)
-#define DELAYVAL 10 // 時間間隔(可更改)
+#define DELAYVAL 20 // 時間間隔(可更改)
 #define NUMPIXELS 12 // 數量(可更改)
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN); //設定腳位及數量(不可更改)
 
@@ -34,14 +34,16 @@ void loop() {
   intSensorResult = analogRead(IR_SENSOR); //Get sensor value
   fltSensorCalc = (6787.0 / (intSensorResult - 3.0)) - 4.0; //Calculate distance in cm
 
-  Serial.print(fltSensorCalc); //Send distance to computer
-  Serial.println(" cm"); //Add cm to result
+  //Serial.print(fltSensorCalc); //Send distance to computer
+  //Serial.println(" cm"); //Add cm to result
   if (fltSensorCalc>=80){ // 80cm is the maxium distance for this sensor
     fltSensorCalc = 80;
     breathing = true;
+     Serial.println("0");
   }
-  else {
+  else {//if (fltSensorCalc<=20)
     breathing = false;
+    Serial.println("1");
   }
 
   if(fltSensorCalc<10){
@@ -61,17 +63,17 @@ void loop() {
 }
 
 void NeoPixel_12_breath(){
-  for(int j=0; j<100; j++){
+  for(int j=0; j<50; j++){
     for(int i=0; i<NUMPIXELS; i++){ //設定「每一顆」燈的顏色
-      pixels.setPixelColor(i, pixels.Color( 255, 255, 255 )); //設定燈的顏色
+      pixels.setPixelColor(i, pixels.Color( 0, 255, 255 )); //設定燈的顏色
     }
     pixels.setBrightness(j); //亮度調整
     pixels.show(); //顯示
     delay(DELAYVAL); //延遲
   }
-  for(int j=100; j>0; j--){
+  for(int j=50; j>0; j--){
     for(int i=0; i<NUMPIXELS; i++){ //設定「每一顆」燈的顏色
-      pixels.setPixelColor(i, pixels.Color( 255, 255, 255 )); //設定燈的顏色
+      pixels.setPixelColor(i, pixels.Color( 0, 255, 255 )); //設定燈的顏色
     }
     pixels.setBrightness(j); //亮度調整
     pixels.show(); //顯示
