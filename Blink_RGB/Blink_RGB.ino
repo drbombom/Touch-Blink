@@ -2,14 +2,14 @@
 
 */
 #include <Adafruit_NeoPixel.h>
-#define PIN 9 // 腳位(可更改)
+#define PIN 6 // 腳位(可更改)
 #define DELAYVAL 20 // 時間間隔(可更改)
 #define NUMPIXELS 12 // 數量(可更改)
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN); //設定腳位及數量(不可更改)
 
   int brightness = 0;  // how bright the LED is
   int fadeAmount = 15;  // how many points to fade the LED by
-  int IR_SENSOR = 1; // 類比讀取腳設為A0Sensor is connected to the analog A0
+  int IR_SENSOR = 0; // 類比讀取腳設為A0Sensor is connected to the analog A0
   int intSensorResult = 0; //Sensor result
   float fltSensorCalc = 0; //Calculated value
   bool breathing = false;
